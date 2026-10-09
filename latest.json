@@ -2,13 +2,13 @@
   "schema_version": 1,
   "product": "Digi",
   "channel": "stable",
-  "latest_version": "1.0.1.0",
+  "latest_version": "1.1.0.0",
   "release_status": "planned",
-  "message": "Digi 1.0.1.0 is being prepared and is not available to install yet.",
+  "message": "Digi 1.1.0.0 is a planned test version and is not available to install yet.",
   "release": {
-    "version": "1.0.1.0",
+    "version": "1.1.0.0",
     "url": "https://github.com/ananas123123/digiwebversionreleases/releases",
     "published_at": null,
-    "notes": "Planned release. Do not offer installation until the full application package has been uploaded, verified, and the release is marked published."
+    "notes": "Planned test version for checking Digi's internet-based release manifest detection. Do not offer installation until the package is uploaded and the release is marked published."
   }
 }
