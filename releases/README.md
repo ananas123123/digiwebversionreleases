@@ -1,10 +1,13 @@
 # Versioned release storage
 
-Store release-specific notes and metadata here only when a real release is prepared. Keep published binary packages in GitHub Releases or another stable HTTPS artifact location rather than committing large binaries to Git history.
+The repository has metadata directories prepared for these planned versions:
 
-Suggested layout for a published version:
+- `1.0.0.0.0/` — full package metadata.
+- `1.0.0.0.1/` — full and incremental package metadata; incremental update is intended to apply from `1.0.0.0.0`.
+- `1.0.0.0.2/` — full and incremental package metadata; incremental update is intended to apply from `1.0.0.0.1`.
 
-- `releases/<version>/release.json` — immutable metadata for that version.
-- `releases/<version>/checksums.txt` — SHA-256 checksums for its published packages.
+Each version's `release.json` describes the expected package filenames, download URLs, SHA-256 hashes, and byte sizes. These version entries are **unpublished templates**, not proof that those versions have been built or released.
 
-Do not create a version directory that implies a release is available until the corresponding package has been built, tested, uploaded, and verified.
+The expected package files are `full-package.zip` for every version and `update-package.zip` for versions `1.0.0.0.1` and `1.0.0.0.2`. Actual ZIP archives are not present yet; do not create fake or empty ZIPs. Upload real, tested packages as release assets or to a stable HTTPS artifact location, then fill in the exact URLs, checksums, and sizes in `release.json`.
+
+Only change `latest.json` to point at a version after its package has been uploaded and verified. Preserve previous published packages for recovery. Never commit secrets into release metadata.
