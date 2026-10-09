@@ -10,14 +10,20 @@ The updater should read [`latest.json`](./latest.json) from the `main` branch us
 
 The manifest uses `schema_version` to identify its format. A `release_status` of `unpublished` means there is no downloadable stable release; the updater must not download or install anything in that state.
 
+## Versioned layout
+
+Metadata templates have been prepared for versions `1.0.0.0.0`, `1.0.0.0.1`, and `1.0.0.0.2` under [`releases/`](./releases/). Each version contains a `release.json`. Version `1.0.0.0.0` expects a full package; `1.0.0.0.1` and `1.0.0.0.2` expect both full and incremental packages.
+
+These are planned version slots, not published application releases. The ZIP files are not present yet because no real packages have been uploaded. The updater must treat these entries as unavailable until genuine packages are built, tested, uploaded, and verified.
+
 ## Publishing a release
 
 1. Build and test the application from the intended stable source revision.
-2. Package the actual distributable installer or update package.
-3. Upload the package to a versioned GitHub Release or versioned release path. Do not commit large binaries to this repository's Git history.
-4. Calculate the package's SHA-256 checksum and record its exact byte size.
-5. Validate the download URL, checksum, size, version, and release notes.
-6. Update `latest.json` only after the package is uploaded and verified. Keep the previous published release available for recovery.
+2. Create the full package and, where supported, an incremental package from the exact prior version.
+3. Upload the real package files to GitHub Release assets or another stable HTTPS artifact location. Do not commit large binaries to Git history.
+4. Calculate each package's SHA-256 checksum and exact byte size.
+5. Fill in and validate that version's `release.json` with real URLs, checksums, sizes, and release notes.
+6. Update `latest.json` only after the package is uploaded and verified. Keep previous published packages available for recovery.
 
 `release-template.json` documents the package metadata expected for a published release. Never publish placeholder URLs, checksums, or sizes as if they were real.
 
