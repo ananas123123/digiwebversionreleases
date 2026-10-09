@@ -4,11 +4,10 @@
   "purpose": "Version-checking and update-transition protocol maintained alongside each published release.",
   "current_planned_transition": {
     "from_version": "1.0.0.0",
-    "to_version": "1.1.0.0",
+    "to_version": "1.0.1.0",
     "relation": "to_version_is_newer",
-    "update_package": "releases/1.1.0.0/update-package.zip",
-    "full_package": "releases/1.1.0.0/full-package.zip",
-    "incremental_allowed_only_when_installed_version_matches_from_version": true
+    "full_package": "releases/1.0.1.0/full-package.zip",
+    "package_status": "not_created_yet"
   },
   "version_ordering": {
     "method": "numeric_components",
@@ -16,27 +15,27 @@
     "examples": [
       {
         "a": "1.0.0.0",
+        "b": "1.0.1.0",
+        "newer": "1.0.1.0"
+      },
+      {
+        "a": "1.0.1.0",
+        "b": "1.0.1.1",
+        "newer": "1.0.1.1"
+      },
+      {
+        "a": "1.0.1.0",
         "b": "1.1.0.0",
         "newer": "1.1.0.0"
       },
       {
         "a": "1.1.0.0",
-        "b": "1.1.0.1",
-        "newer": "1.1.0.1"
-      },
-      {
-        "a": "1.1.0.1",
         "b": "2.0.0.0",
         "newer": "2.0.0.0"
       },
       {
-        "a": "2.0.0.0",
-        "b": "1.1.0.1",
-        "newer": "2.0.0.0"
-      },
-      {
-        "a": "1.1.0.0",
-        "b": "1.1.0.0",
+        "a": "1.0.1.0",
+        "b": "1.0.1.0",
         "newer": null
       }
     ]
@@ -48,18 +47,21 @@
     "steps": [
       "Fetch latest.json over HTTPS and validate its schema and published status.",
       "Compare the installed version with latest_version using numeric_components.",
+      "If release_status is not published, do not offer installation.",
       "If versions are equal, do not update.",
       "If the candidate is older, do not downgrade automatically.",
-      "If the candidate is newer, fetch releases/{latest_version}/release.json and verify that its version matches latest_version.",
-      "Use the incremental package only if its from_version exactly matches the installed version; otherwise use the full package.",
+      "If the candidate is newer, fetch releases/{latest_version}/release.json and verify its version and published status.",
+      "Download the full application package only after it has been published.",
       "Verify package size and SHA-256 before applying it.",
-      "Preserve user data and keep a recoverable previous installation; roll back if the update fails."
+      "Apply only to the designated application installation directory.",
+      "Never overwrite, delete, move, or clean up %LOCALAPPDATA%/.digi/ or any other confirmed user-data location.",
+      "Keep a recoverable previous application installation and roll back if the update fails."
     ]
   },
   "maintenance": {
     "update_this_file_for_each_release": true,
-    "rule": "When preparing each new release, update current_planned_transition to the intended transition and adjust version examples if needed. Also update latest.json and that version's release.json. Do not mark a version published until its real packages are uploaded and verified.",
-    "note": "Version comparison is numeric and does not assume every new release is a minor update. For example, 2.0.0.0 is newer than 1.1.0.1."
+    "rule": "For each release, update current_planned_transition, latest.json, and that version's release.json. Do not mark a version published until the real full-package.zip is uploaded and verified.",
+    "note": "Only a full-package update is planned for the initial implementation. User data must remain outside the replaceable application files."
   },
-  "status": "transition_planned_packages_not_yet_published"
+  "status": "transition_planned_package_not_yet_created"
 }
