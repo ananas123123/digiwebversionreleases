@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "product": "Digi",
+  "version": "1.0.0.0",
+  "status": "unpublished",
+  "published_at": null,
+  "release_notes": null,
+  "packages": {
+    "full": {
+      "file_name": "full-package.zip",
+      "download_url": null,
+      "sha256": null,
+      "size_bytes": null
+    }
+  },
+  "note": "Metadata template only. Not a published release until a real package is uploaded and verified."
+}
