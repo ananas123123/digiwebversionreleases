@@ -15,9 +15,13 @@
   "installation": {
     "target": "designated Digi application installation directory only",
     "preserve_user_data": true,
+    "protocol": "releases/1.0.1.0/USER_DATA_PROTOCOL.md",
     "protected_paths": [
+      "%LOCALAPPDATA%\\Digi\\",
       "%LOCALAPPDATA%\\.digi\\",
-      "all other confirmed user-data, settings, notes, and database locations"
+      "configured library root",
+      "configured Incoming folder",
+      "all confirmed user-data, notes, databases, settings, caches, and indexes"
     ],
     "replace_only_application_files": true
   },
