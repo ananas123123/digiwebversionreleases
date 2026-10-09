@@ -1,35 +1,43 @@
 {
   "schema_version": 1,
   "product": "Digi",
-  "purpose": "Determine whether a published Digi version is newer than the installed version and select a safe update path.",
+  "purpose": "Version-checking and update-transition protocol maintained alongside each published release.",
+  "current_planned_transition": {
+    "from_version": "1.0.0.0",
+    "to_version": "1.1.0.0",
+    "relation": "to_version_is_newer",
+    "update_package": "releases/1.1.0.0/update-package.zip",
+    "full_package": "releases/1.1.0.0/full-package.zip",
+    "incremental_allowed_only_when_installed_version_matches_from_version": true
+  },
   "version_ordering": {
     "method": "numeric_components",
-    "rule": "Compare version components from left to right as integers. At the first differing component, the larger integer is the newer version. Do not compare version strings alphabetically.",
+    "rule": "Compare corresponding version components from left to right as integers. At the first differing component, the larger integer is newer. Do not compare version strings alphabetically.",
     "examples": [
       {
-        "installed": "1.0.0.0",
-        "candidate": "1.1.0.0",
-        "result": "candidate_newer"
+        "a": "1.0.0.0",
+        "b": "1.1.0.0",
+        "newer": "1.1.0.0"
       },
       {
-        "installed": "1.1.0.0",
-        "candidate": "1.1.0.1",
-        "result": "candidate_newer"
+        "a": "1.1.0.0",
+        "b": "1.1.0.1",
+        "newer": "1.1.0.1"
       },
       {
-        "installed": "1.1.0.0",
-        "candidate": "2.0.0.0",
-        "result": "candidate_newer"
+        "a": "1.1.0.1",
+        "b": "2.0.0.0",
+        "newer": "2.0.0.0"
       },
       {
-        "installed": "2.0.0.0",
-        "candidate": "1.1.0.1",
-        "result": "candidate_older"
+        "a": "2.0.0.0",
+        "b": "1.1.0.1",
+        "newer": "2.0.0.0"
       },
       {
-        "installed": "1.1.0.0",
-        "candidate": "1.1.0.0",
-        "result": "same_version"
+        "a": "1.1.0.0",
+        "b": "1.1.0.0",
+        "newer": null
       }
     ]
   },
@@ -37,24 +45,21 @@
     "metadata_source": "https://raw.githubusercontent.com/ananas123123/digiwebversionreleases/main/latest.json",
     "release_metadata_pattern": "https://raw.githubusercontent.com/ananas123123/digiwebversionreleases/main/releases/{version}/release.json",
     "check_on_launch": true,
-    "only_update_when_candidate_is_newer": true,
-    "require_release_status": "published",
-    "update_selection": [
-      "Read latest.json over HTTPS and validate its schema and release status.",
-      "Compare latest_version with the installed version using numeric_components.",
-      "If equal, continue launching without updating.",
-      "If latest_version is older, do not downgrade automatically.",
-      "If latest_version is newer, load that version's release.json and validate that its version matches latest_version.",
-      "Prefer an incremental package only when its from_version exactly matches the installed version and all package metadata is valid.",
-      "Otherwise use the full package when available.",
-      "Verify the downloaded package's SHA-256 and exact size before applying it.",
-      "Preserve user data and retain a recoverable previous installation; if an update fails, restore the previous working version."
+    "steps": [
+      "Fetch latest.json over HTTPS and validate its schema and published status.",
+      "Compare the installed version with latest_version using numeric_components.",
+      "If versions are equal, do not update.",
+      "If the candidate is older, do not downgrade automatically.",
+      "If the candidate is newer, fetch releases/{latest_version}/release.json and verify that its version matches latest_version.",
+      "Use the incremental package only if its from_version exactly matches the installed version; otherwise use the full package.",
+      "Verify package size and SHA-256 before applying it.",
+      "Preserve user data and keep a recoverable previous installation; roll back if the update fails."
     ]
   },
   "maintenance": {
     "update_this_file_for_each_release": true,
-    "rule": "When publishing a new release, update latest.json and the matching releases/{version}/release.json. Update v-checker.json only if the comparison or update-selection protocol itself changes; ordinary new versions should not require changing this protocol file.",
-    "note": "This file defines the protocol, not the current latest version. latest.json is the single source of truth for the current published version."
+    "rule": "When preparing each new release, update current_planned_transition to the intended transition and adjust version examples if needed. Also update latest.json and that version's release.json. Do not mark a version published until its real packages are uploaded and verified.",
+    "note": "Version comparison is numeric and does not assume every new release is a minor update. For example, 2.0.0.0 is newer than 1.1.0.1."
   },
-  "status": "protocol_defined_no_release_published"
+  "status": "transition_planned_packages_not_yet_published"
 }
