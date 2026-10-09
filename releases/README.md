@@ -1,13 +1,10 @@
 # Versioned release storage
 
-The repository has metadata directories prepared for these planned versions:
+Only these two version directories are currently prepared:
 
-- `1.0.0.0.0/` — full package metadata.
-- `1.0.0.0.1/` — full and incremental package metadata; incremental update is intended to apply from `1.0.0.0.0`.
-- `1.0.0.0.2/` — full and incremental package metadata; incremental update is intended to apply from `1.0.0.0.1`.
+- `1.0.0.0/release.json` — metadata for the full package `full-package.zip`.
+- `1.1.0.0/release.json` — metadata for `full-package.zip` and `update-package.zip`, with the incremental package intended to apply from `1.0.0.0`.
 
-Each version's `release.json` describes the expected package filenames, download URLs, SHA-256 hashes, and byte sizes. These version entries are **unpublished templates**, not proof that those versions have been built or released.
+These files are unpublished metadata templates. The actual ZIP packages have not been built or uploaded, and these versions must not be advertised as available until real packages have been verified.
 
-The expected package files are `full-package.zip` for every version and `update-package.zip` for versions `1.0.0.0.1` and `1.0.0.0.2`. Actual ZIP archives are not present yet; do not create fake or empty ZIPs. Upload real, tested packages as release assets or to a stable HTTPS artifact location, then fill in the exact URLs, checksums, and sizes in `release.json`.
-
-Only change `latest.json` to point at a version after its package has been uploaded and verified. Preserve previous published packages for recovery. Never commit secrets into release metadata.
+Upload genuine packages to GitHub Release assets or another stable HTTPS artifact location, then populate each `release.json` with the exact download URL, SHA-256 checksum, and byte size. Update `latest.json` only after a release package is available and verified. Preserve previous published packages for recovery.
