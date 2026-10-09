@@ -2,8 +2,13 @@
   "schema_version": 1,
   "product": "Digi",
   "channel": "stable",
-  "latest_version": null,
-  "release_status": "unpublished",
-  "message": "No stable application build has been published yet.",
-  "release": null
+  "latest_version": "1.0.0.1",
+  "release_status": "published",
+  "message": "TEST ONLY: temporary release metadata to verify the red update indicator. No application release is attached.",
+  "release": {
+    "version": "1.0.0.1",
+    "url": "https://github.com/ananas123123/digiwebversionreleases/releases",
+    "published_at": null,
+    "notes": "Temporary update-indicator test. Do not treat as a real release."
+  }
 }
