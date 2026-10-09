@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "product": "Digi",
+  "channel": "stable",
+  "version": "1.0.0.0.0",
+  "published_at": null,
+  "minimum_supported_version": null,
+  "release_notes_url": null,
+  "packages": {
+    "windows_x64": {
+      "file_name": "Digi-Setup.exe",
+      "download_url": null,
+      "sha256": null,
+      "size_bytes": null
+    }
+  }
+}
