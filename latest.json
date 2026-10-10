@@ -3,8 +3,8 @@
   "product": "Digi",
   "channel": "stable",
   "latest_version": "1.1.0.0",
-  "release_status": "published",
-  "message": "Digi 1.1.0.0 is published for updater pipeline testing. This test release contains a text fixture, not an installable Windows executable.",
+  "release_status": "unpublished",
+  "message": "Digi 1.1.0.0 is announced. Its GitHub Release executable must be uploaded and its exact size and SHA-256 recorded before downloads are enabled.",
   "release": {
     "version": "1.1.0.0"
   }
