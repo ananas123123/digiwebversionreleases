@@ -1,40 +1,38 @@
 # Digi Web Version Releases
 
-This repository publishes stable Digi application releases and provides public metadata for the application's updater.
+This repository hosts the stable-release metadata used by Digi's built-in updater.
 
-## Update endpoint
+## Current stable release
 
-The updater reads [`latest.json`](./latest.json) over HTTPS:
+- **Latest version:** 1.2.0.0
+- **Previous version:** 1.1.0.0
+- **Status:** published
+- **Release asset:** [Digi.Search.Engine.exe](https://github.com/ananas123123/digiwebversionreleases/releases/download/v1.2.0.0/Digi.Search.Engine.exe)
+- **Release page:** https://github.com/ananas123123/digiwebversionreleases/releases/tag/v1.2.0.0
 
-`https://raw.githubusercontent.com/ananas123123/digiwebversionreleases/main/latest.json`
+## Metadata flow
 
-A `release_status` of `unpublished` means no stable release is available. The updater must not download or install anything in that state.
+1. Digi fetches [latest.json](./latest.json) from the repository root. Its `latest_version` field is the authoritative latest-version pointer.
+2. Digi fetches [releases/directory.json](./releases/directory.json). The `releases` map resolves a version to its folder and metadata file.
+3. Digi fetches the selected version metadata, currently [releases/1.2.0.0/1.2.0.0.json](./releases/1.2.0.0/1.2.0.0.json).
+4. The manifest's package information must match its `files` inventory.
+5. Digi downloads the HTTPS release asset, verifies exact byte size and SHA-256, then stages it for the updater helper.
+6. The helper replaces only the installed Digi executable, waits for startup confirmation, and rolls back if confirmation fails. User data remains outside the replaceable executable.
 
-## Planned versions
+## Publishing a release
 
-Only two version directories are prepared:
+1. Build and test the exact version being released.
+2. Upload the actual executable to a GitHub Release asset.
+3. Verify the asset's URL, exact byte size, and SHA-256.
+4. Create version metadata in `releases/VERSION/VERSION.json`.
+5. Add the version to `releases/directory.json`.
+6. Validate all metadata JSON and cross-file consistency.
+7. Update `latest.json` last, after the asset and version metadata are ready.
+8. Keep previous release assets and metadata available for recovery.
 
-- [`releases/1.0.0.0/`](./releases/1.0.0.0/) — full package metadata.
-- [`releases/1.1.0.0/`](./releases/1.1.0.0/) — full package metadata and an incremental update from `1.0.0.0`.
+## Security and integrity
 
-These are metadata templates, not published releases. Actual ZIP packages are not present yet. Do not treat either version as available until its real package has been built, tested, uploaded, and verified.
-
-## Publishing
-
-1. Build and test the intended stable application version.
-2. Create the full package; for `1.1.0.0`, also create an incremental package that applies specifically to `1.0.0.0`.
-3. Upload real packages to GitHub Release assets or another stable HTTPS artifact location. Avoid committing large binaries to Git history.
-4. Calculate each package's SHA-256 checksum and exact byte size.
-5. Fill in `release.json` with real URLs, checksums, sizes, and release notes.
-6. Update `latest.json` only after the selected package is uploaded and verified. Keep previous published packages available for recovery.
-
-## Security
-
-- Use HTTPS for metadata and package downloads.
-- Validate the manifest and version before acting.
-- Verify package SHA-256 before installation. A checksum detects corruption but does not establish publisher identity; production releases should also use a trusted signing process.
-- Failed updates must be recoverable and must preserve user data.
-
-## Current status
-
-No application package has been published. `latest.json` remains `unpublished` until a real, tested build is available.
+- Metadata and downloads must use HTTPS.
+- A SHA-256 checksum detects corruption but does not prove publisher identity; signed releases are recommended for stronger authenticity.
+- Never publish invented sizes or checksums.
+- Never mark a release published before its actual artifact is uploaded and verified.
