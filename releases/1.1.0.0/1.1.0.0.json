@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "product": "Digi",
+  "version": "1.1.0.0",
+  "directory": "1.1.0.0",
+  "published_at": "2026-10-10",
+  "release_notes": "Updater pipeline test release. Contains a text fixture, not a Windows installer.",
+  "package": {
+    "file_name": "Digi Update Test.txt",
+    "path": "Digi Update Test.txt",
+    "kind": "test-fixture",
+    "size_bytes": 194,
+    "sha256": "90e6c0721812541084c1b143930136153c1d1a7190140c90e43f008afc9a2fc6"
+  },
+  "files": [
+    {
+      "file_name": "Digi Update Test.txt",
+      "path": "Digi Update Test.txt",
+      "kind": "test-fixture",
+      "size_bytes": 194,
+      "sha256": "90e6c0721812541084c1b143930136153c1d1a7190140c90e43f008afc9a2fc6"
+    }
+  ]
+}
