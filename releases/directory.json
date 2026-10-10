@@ -5,15 +5,11 @@
   "releases": {
     "1.0.0.0": {
       "directory": "1.0.0.0",
-      "metadata_file": "1.0.0.0/1.0.0.0.json"
+      "metadata_file": "1.0.0.0/release.json"
     },
     "1.1.0.0": {
       "directory": "1.1.0.0",
       "metadata_file": "1.1.0.0/1.1.0.0.json"
-    },
-    "1.2.0.0": {
-      "directory": "1.2.0.0",
-      "metadata_file": "1.2.0.0/1.2.0.0.json"
     }
   }
 }
