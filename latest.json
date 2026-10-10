@@ -4,17 +4,8 @@
   "channel": "stable",
   "latest_version": "1.2.0.0",
   "release_status": "published",
-  "message": "TEMPORARY TEST: Digi 1.2.0.0 publishes a plain-text download fixture only. It is not an installer; downloading it must not install or replace Digi.",
+  "message": "Temporary 1.2.0.0 updater test. Resolve the release through releases/directory.json and the version-specific metadata file.",
   "release": {
-    "version": "1.2.0.0",
-    "url": "https://github.com/ananas123123/digiwebversionreleases/releases",
-    "published_at": null,
-    "notes": "Temporary updater download test. This release points to a plain-text fixture to verify download, size/SHA-256 verification, and saving to the package installer folder only.",
-    "package": {
-      "url": "https://raw.githubusercontent.com/ananas123123/Digi.app/test-update-installer/releases/1.2.0.0/Digi%20Update%20Test.txt",
-      "file_name": "Digi Update Test.txt",
-      "size_bytes": 248,
-      "sha256": "ae36f45ec132d148fc63916e402caf61b66fb83f54e506088335721e2336d24a"
-    }
+    "version": "1.2.0.0"
   }
 }
