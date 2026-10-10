@@ -2,16 +2,27 @@
   "schema_version": 1,
   "product": "Digi",
   "channel": "stable",
-  "version": "1.0.0.0.0",
+  "version": "X.Y.Z.W",
+  "directory": "X.Y.Z.W",
   "published_at": null,
-  "minimum_supported_version": null,
+  "release_notes": null,
   "release_notes_url": null,
-  "packages": {
-    "windows_x64": {
-      "file_name": "Digi-Setup.exe",
-      "download_url": null,
-      "sha256": null,
-      "size_bytes": null
+  "package": {
+    "file_name": "Digi.Search.Engine.exe",
+    "path": "Digi.Search.Engine.exe",
+    "url": null,
+    "kind": "installer",
+    "size_bytes": null,
+    "sha256": null
+  },
+  "files": [
+    {
+      "file_name": "Digi.Search.Engine.exe",
+      "path": "Digi.Search.Engine.exe",
+      "url": null,
+      "kind": "installer",
+      "size_bytes": null,
+      "sha256": null
     }
-  }
+  ]
 }
