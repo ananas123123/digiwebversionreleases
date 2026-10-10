@@ -10,5 +10,14 @@
     "kind": "test-fixture",
     "size_bytes": 248,
     "sha256": "ae36f45ec132d148fc63916e402caf61b66fb83f54e506088335721e2336d24a"
-  }
+  },
+  "files": [
+    {
+      "file_name": "Digi Update Test.txt",
+      "path": "Digi Update Test.txt",
+      "kind": "test-fixture",
+      "size_bytes": 248,
+      "sha256": "ae36f45ec132d148fc63916e402caf61b66fb83f54e506088335721e2336d24a"
+    }
+  ]
 }
