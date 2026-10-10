@@ -1,67 +1,65 @@
 {
   "schema_version": 1,
   "product": "Digi",
-  "purpose": "Version-checking and update-transition protocol maintained alongside each published release.",
-  "current_planned_transition": {
-    "from_version": "1.0.0.0",
-    "to_version": "1.0.1.0",
+  "purpose": "Version checking and update-transition protocol for Digi stable releases.",
+  "current_transition": {
+    "from_version": "1.1.0.0",
+    "to_version": "1.2.0.0",
     "relation": "to_version_is_newer",
-    "full_package": "releases/1.0.1.0/full-package.zip",
-    "package_status": "not_created_yet"
+    "release_status": "published",
+    "metadata_file": "releases/1.2.0.0/1.2.0.0.json",
+    "package_url": "https://github.com/ananas123123/digiwebversionreleases/releases/download/v1.2.0.0/Digi.Search.Engine.exe",
+    "package_status": "asset_uploaded_and_metadata_verified"
   },
   "version_ordering": {
     "method": "numeric_components",
-    "rule": "Compare corresponding version components from left to right as integers. At the first differing component, the larger integer is newer. Do not compare version strings alphabetically.",
+    "rule": "Compare corresponding version components from left to right as integers. At the first differing component, the larger integer is newer. Never compare version strings alphabetically.",
     "examples": [
       {
-        "a": "1.0.0.0",
-        "b": "1.0.1.0",
-        "newer": "1.0.1.0"
-      },
-      {
-        "a": "1.0.1.0",
-        "b": "1.0.1.1",
-        "newer": "1.0.1.1"
-      },
-      {
-        "a": "1.0.1.0",
-        "b": "1.1.0.0",
-        "newer": "1.1.0.0"
-      },
-      {
         "a": "1.1.0.0",
+        "b": "1.2.0.0",
+        "newer": "1.2.0.0"
+      },
+      {
+        "a": "1.2.0.0",
+        "b": "1.2.0.0",
+        "newer": null
+      },
+      {
+        "a": "1.2.0.0",
         "b": "2.0.0.0",
         "newer": "2.0.0.0"
-      },
-      {
-        "a": "1.0.1.0",
-        "b": "1.0.1.0",
-        "newer": null
       }
     ]
   },
   "update_protocol": {
     "metadata_source": "https://raw.githubusercontent.com/ananas123123/digiwebversionreleases/main/latest.json",
-    "release_metadata_pattern": "https://raw.githubusercontent.com/ananas123123/digiwebversionreleases/main/releases/{version}/release.json",
+    "directory_source": "https://raw.githubusercontent.com/ananas123123/digiwebversionreleases/main/releases/directory.json",
+    "release_metadata_pattern": "https://raw.githubusercontent.com/ananas123123/digiwebversionreleases/main/releases/{version}/{version}.json",
     "check_on_launch": true,
     "steps": [
-      "Fetch latest.json over HTTPS and validate its schema and published status.",
-      "Compare the installed version with latest_version using numeric_components.",
-      "If release_status is not published, do not offer installation.",
-      "If versions are equal, do not update.",
-      "If the candidate is older, do not downgrade automatically.",
-      "If the candidate is newer, fetch releases/{latest_version}/release.json and verify its version and published status.",
-      "Download the full application package only after it has been published.",
-      "Verify package size and SHA-256 before applying it.",
-      "Apply only to the designated application installation directory.",
-      "Never overwrite, delete, move, or clean up %LOCALAPPDATA%/.digi/ or any other confirmed user-data location.",
-      "Keep a recoverable previous application installation and roll back if the update fails."
+      "Fetch latest.json over HTTPS and validate schema, product, version, and release_status.",
+      "If release_status is unpublished, do not offer an update.",
+      "Compare installed and latest versions numerically; do not downgrade.",
+      "Read releases/directory.json and find the entry matching latest_version.",
+      "Fetch the metadata_file listed for that version and validate its schema, product, version, and directory against the index.",
+      "Validate package filename, HTTPS URL, positive size_bytes, 64-character SHA-256, and matching files inventory.",
+      "Download only the selected release asset and display progress.",
+      "Verify exact byte size and SHA-256 before passing the candidate to the updater helper.",
+      "Replace only the designated installed application executable; preserve Digi user data.",
+      "Wait for the new app's startup confirmation and restore the previous executable if confirmation fails."
     ]
   },
-  "maintenance": {
-    "update_this_file_for_each_release": true,
-    "rule": "For each release, update current_planned_transition, latest.json, and that version's release.json. Do not mark a version published until the real full-package.zip is uploaded and verified.",
-    "note": "Only a full-package update is planned for the initial implementation. User data must remain outside the replaceable application files."
+  "current_release": {
+    "version": "1.2.0.0",
+    "published_at": "2026-10-10T18:48:57Z",
+    "package_file": "Digi.Search.Engine.exe",
+    "size_bytes": 249486929,
+    "sha256": "60931cbfab3af4a71a9548d904be25a781776079f50264a8859ae53ab3d2e03d"
   },
-  "status": "transition_planned_package_not_yet_created"
+  "maintenance": {
+    "update_for_each_release": true,
+    "rule": "Create and verify version-specific metadata first, add the version to releases/directory.json second, and update latest.json last. Never mark a release published until its actual release asset exists and its size and SHA-256 are verified. Keep prior releases available."
+  },
+  "status": "1.2.0.0 metadata indexed; latest pointer updated separately after supporting metadata."
 }
