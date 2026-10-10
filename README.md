@@ -4,17 +4,16 @@ This repository hosts the stable-release metadata used by Digi's built-in update
 
 ## Current stable release
 
-- **Latest version:** 1.2.0.0
-- **Previous version:** 1.1.0.0
+- **Latest version:** 1.1.0.0
 - **Status:** published
-- **Release asset:** [Digi.Search.Engine.exe](https://github.com/ananas123123/digiwebversionreleases/releases/download/v1.2.0.0/Digi.Search.Engine.exe)
-- **Release page:** https://github.com/ananas123123/digiwebversionreleases/releases/tag/v1.2.0.0
+- **Release asset:** [Digi.Search.Engine.exe](https://github.com/ananas123123/digiwebversionreleases/releases/download/v1.1.0.0/Digi.Search.Engine.exe)
+- **Release page:** https://github.com/ananas123123/digiwebversionreleases/releases/tag/v1.1.0.0
 
 ## Metadata flow
 
 1. Digi fetches [latest.json](./latest.json) from the repository root. Its `latest_version` field is the authoritative latest-version pointer.
 2. Digi fetches [releases/directory.json](./releases/directory.json). The `releases` map resolves a version to its folder and metadata file.
-3. Digi fetches the selected version metadata, currently [releases/1.2.0.0/1.2.0.0.json](./releases/1.2.0.0/1.2.0.0.json).
+3. Digi fetches the selected version metadata, currently [releases/1.1.0.0/1.1.0.0.json](./releases/1.1.0.0/1.1.0.0.json).
 4. The manifest's package information must match its `files` inventory.
 5. Digi downloads the HTTPS release asset, verifies exact byte size and SHA-256, then stages it for the updater helper.
 6. The helper replaces only the installed Digi executable, waits for startup confirmation, and rolls back if confirmation fails. User data remains outside the replaceable executable.
