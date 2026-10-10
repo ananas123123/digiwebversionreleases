@@ -1,2 +1,0 @@
-Digi 1.1.0.0 update-package test fixture.
-This is not a Windows executable and cannot be installed. It exists only to test release lookup, download, size verification, and SHA-256 verification.
