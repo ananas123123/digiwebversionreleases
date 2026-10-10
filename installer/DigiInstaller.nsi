@@ -16,7 +16,7 @@ RequestExecutionLevel user
 !define BRAND_TEXT "E8E8E8"
 
 Name "${APP_NAME}"
-OutFile "DigiInstaller.exe"
+OutFile "${__FILEDIR__}\\DigiInstaller.exe"
 InstallDir "${INSTALL_DIR}"
 InstallDirRegKey HKCU "Software\Digi" "InstallDir"
 
@@ -33,6 +33,7 @@ VIAddVersionKey "CompanyName" "Digi"
 !define MUI_FINISHPAGE_TEXT "Digi has been installed. Select Finish to close setup."
 !define MUI_FINISHPAGE_RUN "$INSTDIR\${APP_EXE}"
 !define MUI_FINISHPAGE_RUN_TEXT "Launch Digi now"
+!define MUI_FINISHPAGE_RUN_NOTCHECKED
 !define MUI_ABORTWARNING
 !define MUI_UNABORTWARNING
 
