@@ -1,61 +1,48 @@
-# Digi NSIS installer design
+# Digi NSIS installer
 
-## Goal
+## Visual design
 
-Build a small per-user Windows installer that places Digi in:
+The installer uses Digi's charcoal-and-muted-gold visual identity: near-black charcoal, soft white text, and restrained gold branding. It uses the standard NSIS Modern UI 2 wizard so installation remains familiar and predictable on Windows. The welcome and finish pages are branded; standard Windows controls may still use the operating system's native appearance.
 
-`%LOCALAPPDATA%\Digi`
+## Build process
 
-It does not require administrator privileges and does not install into Program Files.
+1. Build `Digi Search Engine.exe` and `DigiUpdater.exe` from the intended `Digi.app` commit.
+2. Copy both executables and their matching `version.txt` into `installer/payload/`.
+3. Open `DigiInstaller.nsi` in MakeNSISW and compile.
+4. Test the resulting `DigiInstaller.exe` on a clean Windows profile and over an existing installation before publishing.
 
-## Simple build flow
+NSIS packages the already-built application. It does not compile the Digi application itself. Built executables are intentionally not stored in this repository.
 
-1. Build the two executables from `Digi.app` using the project's build process:
-   - `Digi Search Engine.exe`
-   - `DigiUpdater.exe`
-2. Copy those finished executables and the matching `version.txt` into this folder:
-   `installer/payload/`
-3. Open `DigiInstaller.nsi` in MakeNSISW and compile it.
-4. NSIS outputs `DigiInstaller.exe` beside the `.nsi` file. Test it on a clean Windows user profile before publishing.
-
-**NSIS packages files; it does not compile the Digi application.** The EXEs must already have been built. Do not commit the built EXEs to this release-metadata repository unless deliberately deciding to store binaries here.
-
-## Expected staging layout
+## Staging layout
 
 ```text
 installer/
 ├── DigiInstaller.nsi
 ├── README.md
-└── payload/                         # local staging folder; provide before compiling
+└── payload/
     ├── Digi Search Engine.exe
     ├── DigiUpdater.exe
     └── version.txt
 ```
 
-The `payload/` folder is deliberately not populated with fake or placeholder executables in Git. NSIS compilation will fail clearly if a required payload file is missing.
+## Install behaviour
 
-## What the installer does
+The installer installs to `%LOCALAPPDATA%\Digi` without requesting administrator privileges. It creates `Search Repository\Digi Notes`, `Cache`, and `Logs` if missing, and does not erase their contents. Digi's first-run bootstrap remains responsible for `Version manager` metadata.
 
-- Installs/updates the two EXEs to `%LOCALAPPDATA%\Digi`.
-- Creates `Search Repository\Digi Notes`, `Cache`, and `Logs` if they do not exist.
-- Leaves existing files in those data folders untouched.
-- Leaves `Version manager` initialization to Digi's first-run bootstrap.
-- Creates a Desktop shortcut and Start Menu shortcuts for the current Windows user.
-- Records the install path and installed version in `HKCU\Software\Digi`.
-- Includes an uninstaller.
+It creates Desktop and Start Menu shortcuts and registers the install path/version for the current Windows user. The finish page offers to launch Digi.
 
-## Uninstall safety
+## Uninstall behaviour
 
-The uninstaller removes the two application EXEs, root `version.txt`, the uninstaller, shortcuts, and the Digi registry key. It intentionally does **not** delete Search Repository, Cache, Logs, Version manager, or other user files. The install directory will remain if it contains user data.
+The uninstaller removes the two application executables, root `version.txt`, its own uninstaller, shortcuts, and the Digi registry key. It preserves `Search Repository`, `Cache`, `Logs`, `Version manager`, and any other remaining user files.
 
-## Release checklist
+## Before release
 
 - [ ] Set `APP_VERSION` to the exact release version.
-- [ ] Build both EXEs from the intended `Digi.app` commit.
-- [ ] Put both EXEs and the matching `version.txt` in `payload/`.
-- [ ] Compile using MakeNSISW.
-- [ ] Install on a clean Windows account and verify both EXEs, folders, shortcuts, and first-run bootstrap.
-- [ ] Install over an existing Digi folder and confirm Search Repository and Cache are unchanged.
-- [ ] Uninstall and confirm user data is preserved.
-- [ ] Test update/rollback separately; a successful installer compile is not proof that the updater works.
-- [ ] Publish the resulting installer from the release workflow/site, not from the NSIS source folder.
+- [ ] Stage both EXEs and the matching `version.txt`.
+- [ ] Compile in MakeNSISW.
+- [ ] Verify clean installation, existing-install update, shortcuts, first-run bootstrap, and uninstall.
+- [ ] Confirm that user data is preserved.
+- [ ] Test the updater and rollback separately.
+- [ ] Publish the resulting installer through the intended release/site workflow.
+
+The script is a design implementation, not a verified Windows build. It must be compiled and tested with NSIS on Windows before being distributed.
