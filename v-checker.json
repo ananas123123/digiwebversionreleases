@@ -3,12 +3,12 @@
   "product": "Digi",
   "purpose": "Version checking and update-transition protocol for Digi stable releases.",
   "current_transition": {
-    "from_version": "1.1.0.0",
-    "to_version": "1.2.0.0",
+    "from_version": "1.0.0.0",
+    "to_version": "1.1.0.0",
     "relation": "to_version_is_newer",
     "release_status": "published",
-    "metadata_file": "releases/1.2.0.0/1.2.0.0.json",
-    "package_url": "https://github.com/ananas123123/digiwebversionreleases/releases/download/v1.2.0.0/Digi.Search.Engine.exe",
+    "metadata_file": "releases/1.1.0.0/1.1.0.0.json",
+    "package_url": "https://github.com/ananas123123/digiwebversionreleases/releases/download/v1.1.0.0/Digi.Search.Engine.exe",
     "package_status": "asset_uploaded_and_metadata_verified"
   },
   "version_ordering": {
@@ -16,17 +16,17 @@
     "rule": "Compare corresponding version components from left to right as integers. At the first differing component, the larger integer is newer. Never compare version strings alphabetically.",
     "examples": [
       {
-        "a": "1.1.0.0",
-        "b": "1.2.0.0",
-        "newer": "1.2.0.0"
+        "a": "1.0.0.0",
+        "b": "1.1.0.0",
+        "newer": "1.1.0.0"
       },
       {
-        "a": "1.2.0.0",
-        "b": "1.2.0.0",
+        "a": "1.1.0.0",
+        "b": "1.1.0.0",
         "newer": null
       },
       {
-        "a": "1.2.0.0",
+        "a": "1.1.0.0",
         "b": "2.0.0.0",
         "newer": "2.0.0.0"
       }
@@ -51,8 +51,8 @@
     ]
   },
   "current_release": {
-    "version": "1.2.0.0",
-    "published_at": "2026-10-10T18:48:57Z",
+    "version": "1.1.0.0",
+    "published_at": "2026-10-10T18:20:25Z",
     "package_file": "Digi.Search.Engine.exe",
     "size_bytes": 249486929,
     "sha256": "60931cbfab3af4a71a9548d904be25a781776079f50264a8859ae53ab3d2e03d"
@@ -61,5 +61,5 @@
     "update_for_each_release": true,
     "rule": "Create and verify version-specific metadata first, add the version to releases/directory.json second, and update latest.json last. Never mark a release published until its actual release asset exists and its size and SHA-256 are verified. Keep prior releases available."
   },
-  "status": "1.2.0.0 metadata indexed; latest pointer updated separately after supporting metadata."
+  "status": "1.1.0.0 is the current stable release; historical release metadata remains indexed."
 }
