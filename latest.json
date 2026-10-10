@@ -2,11 +2,11 @@
   "schema_version": 1,
   "product": "Digi",
   "channel": "stable",
-  "latest_version": "1.1.0.0",
+  "latest_version": "1.2.0.0",
   "release_status": "published",
-  "message": "TEMPORARY TEST SIMULATION: Digi 1.1.0.0 is being used to test the live updater. No application package is available.",
+  "message": "TEMPORARY TEST SIMULATION: Digi 1.2.0.0 is being used to test update-version detection. No application package is available; do not attempt installation.",
   "release": {
-    "version": "1.1.0.0",
+    "version": "1.2.0.0",
     "url": "https://github.com/ananas123123/digiwebversionreleases/releases",
     "published_at": null,
     "notes": "Temporary live-feed simulation only. No full or incremental application package has been uploaded or verified. Replace this metadata with accurate publication details after packaging."
