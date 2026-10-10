@@ -39,7 +39,6 @@ VIAddVersionKey "CompanyName" "Digi"
 ; MUI's welcome/finish pages use the charcoal background and light text.
 !define MUI_BGCOLOR "${BRAND_DARK}"
 !define MUI_TEXTCOLOR "${BRAND_TEXT}"
-!define MUI_WELCOMEFINISHPAGE_BITMAP_STRETCH
 
 ; Installer pages.
 !insertmacro MUI_PAGE_WELCOME
@@ -54,6 +53,7 @@ VIAddVersionKey "CompanyName" "Digi"
 !insertmacro MUI_LANGUAGE "English"
 
 BrandingText "Digi  |  A calmer workspace"
+InstallColors "${BRAND_GOLD}" "${BRAND_DARK}"
 
 ShowInstDetails show
 ShowUninstDetails show
