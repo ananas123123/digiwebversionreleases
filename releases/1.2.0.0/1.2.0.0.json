@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "product": "Digi",
+  "version": "1.2.0.0",
+  "directory": "1.2.0.0",
+  "published_at": "2026-10-10T18:48:57Z",
+  "release_notes": "Digi 1.2.0.0 stable release. This release is distributed as the verified Windows x64 application executable.",
+  "release_notes_url": "https://github.com/ananas123123/digiwebversionreleases/releases/tag/v1.2.0.0",
+  "package": {
+    "file_name": "Digi.Search.Engine.exe",
+    "path": "Digi.Search.Engine.exe",
+    "url": "https://github.com/ananas123123/digiwebversionreleases/releases/download/v1.2.0.0/Digi.Search.Engine.exe",
+    "kind": "installer",
+    "size_bytes": 249486929,
+    "sha256": "60931cbfab3af4a71a9548d904be25a781776079f50264a8859ae53ab3d2e03d"
+  },
+  "files": [
+    {
+      "file_name": "Digi.Search.Engine.exe",
+      "path": "Digi.Search.Engine.exe",
+      "url": "https://github.com/ananas123123/digiwebversionreleases/releases/download/v1.2.0.0/Digi.Search.Engine.exe",
+      "kind": "installer",
+      "size_bytes": 249486929,
+      "sha256": "60931cbfab3af4a71a9548d904be25a781776079f50264a8859ae53ab3d2e03d"
+    }
+  ]
+}
