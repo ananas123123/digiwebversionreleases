@@ -2,7 +2,6 @@ Unicode true
 RequestExecutionLevel user
 
 ; Digi brand: charcoal, soft white, and muted gold.
-; MUI2 gives the installer a consistent Windows wizard flow.
 !include "MUI2.nsh"
 
 !define APP_NAME "Digi"
@@ -16,7 +15,7 @@ RequestExecutionLevel user
 !define BRAND_TEXT "E8E8E8"
 
 Name "${APP_NAME}"
-OutFile "${__FILEDIR__}\\DigiInstaller.exe"
+OutFile "${__FILEDIR__}\DigiInstaller.exe"
 InstallDir "${INSTALL_DIR}"
 InstallDirRegKey HKCU "Software\Digi" "InstallDir"
 
@@ -28,7 +27,7 @@ VIAddVersionKey "CompanyName" "Digi"
 
 ; Branded welcome and finish pages.
 !define MUI_WELCOMEPAGE_TITLE "Welcome to Digi"
-!define MUI_WELCOMEPAGE_TEXT "Digi brings your workspace together. This setup will install Digi for your Windows user account.$\r$\n$\r$\nYour files and existing Search Repository will be preserved."
+!define MUI_WELCOMEPAGE_TEXT "Digi brings your workspace together. This setup will install Digi for your Windows user account.$\r$\n$\r$\nIf Digi is already installed, setup will ask before replacing the application executables. Your notes and other user data will be preserved."
 !define MUI_FINISHPAGE_TITLE "Digi is ready"
 !define MUI_FINISHPAGE_TEXT "Digi has been installed. Select Finish to close setup."
 !define MUI_FINISHPAGE_RUN "$INSTDIR\${APP_EXE}"
@@ -61,27 +60,38 @@ ShowUninstDetails show
 
 Function .onInit
   SetShellVarContext current
+
+  ; Detect an existing install by its app executable or installer registry entry.
+  ; Confirm before replacing app binaries; never delete the install directory.
+  IfFileExists "$LOCALAPPDATA\Digi\${APP_EXE}" existing_digi_check
+  ReadRegStr $0 HKCU "Software\Digi" "InstallDir"
+  StrCmp $0 "" init_done
+  IfFileExists "$0\${APP_EXE}" existing_digi_check init_done
+
+  existing_digi_check:
+    MessageBox MB_ICONEXCLAMATION|MB_YESNO|MB_DEFBUTTON2 "Digi already exists on this computer.$\r$\n$\r$\nYes: replace the Digi application executables with this version.$\r$\nNo: cancel setup.$\r$\n$\r$\nYour Search Repository, notes, Cache, Logs, and Version manager data will not be intentionally deleted." IDYES init_done
+    Abort
+
+  init_done:
 FunctionEnd
 
 Section "Install Digi" SEC_INSTALL
   SetShellVarContext current
   SetOutPath "$INSTDIR"
 
-  ; Payload files are built by Digi.app before this script is compiled.
-  ; A missing payload file should make compilation fail rather than package a partial app.
+  ; These are the two application binaries present in the supplied build output.
+  ; Paths are relative to this .nsi file, so MakeNSISW can be opened from any directory.
+  ; A missing payload file makes compilation fail instead of packaging a partial app.
   SetOverwrite on
-  File "payload\Digi Search Engine.exe"
-  File "payload\DigiUpdater.exe"
-  File "payload\version.txt"
+  File "${__FILEDIR__}\payload\Digi Search Engine.exe"
+  File "${__FILEDIR__}\payload\DigiUpdater.exe"
 
-  ; Create app data folders only when missing; never clear existing content.
+  ; Match the supplied post-build layout. Create folders only when missing;
+  ; never clear existing content. The app bootstraps Version manager metadata.
   CreateDirectory "$INSTDIR\Search Repository"
   CreateDirectory "$INSTDIR\Search Repository\Digi Notes"
   CreateDirectory "$INSTDIR\Cache"
   CreateDirectory "$INSTDIR\Logs"
-
-  ; Digi initializes Version manager metadata on first launch.
-  ; Do not create or overwrite that directory from the installer.
 
   WriteRegStr HKCU "Software\Digi" "InstallDir" "$INSTDIR"
   WriteRegStr HKCU "Software\Digi" "Version" "${APP_VERSION}"
@@ -103,11 +113,9 @@ Section "Uninstall"
   Delete "${START_MENU_DIR}\Uninstall Digi.lnk"
   RMDir "${START_MENU_DIR}"
 
-  ; Remove only app-owned files. Keep Search Repository, Cache, Logs,
-  ; Version manager, and other user data.
+  ; Remove only app-owned files. Preserve user data and unknown files.
   Delete "$INSTDIR\${APP_EXE}"
   Delete "$INSTDIR\${UPDATER_EXE}"
-  Delete "$INSTDIR\version.txt"
   Delete "$INSTDIR\Uninstall Digi.exe"
 
   DeleteRegKey HKCU "Software\Digi"
