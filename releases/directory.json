@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "product": "Digi",
+  "directory": "releases",
+  "releases": {
+    "1.2.0.0": {
+      "directory": "1.2.0.0",
+      "metadata_file": "1.2.0.0/1.2.0.0.json"
+    }
+  }
+}
