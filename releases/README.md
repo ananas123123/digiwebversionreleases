@@ -1,10 +1,13 @@
 # Versioned release storage
 
-Only these two version directories are currently prepared:
+Each release has its own folder and version-specific JSON metadata file.
 
-- `1.0.0.0/release.json` — metadata for the full package `full-package.zip`.
-- `1.1.0.0/release.json` — metadata for `full-package.zip` and `update-package.zip`, with the incremental package intended to apply from `1.0.0.0`.
+- `1.0.0.0/1.0.0.0.json` — retained historical release metadata.
+- `1.1.0.0/1.1.0.0.json` — retained previous release metadata.
+- `1.2.0.0/1.2.0.0.json` — current stable release metadata.
 
-These files are unpublished metadata templates. The actual ZIP packages have not been built or uploaded, and these versions must not be advertised as available until real packages have been verified.
+The root `latest.json` points to the current version. `releases/directory.json` maps each version to its folder and metadata file. Digi reads the directory index and then fetches the exact metadata file for the selected latest version.
 
-Upload genuine packages to GitHub Release assets or another stable HTTPS artifact location, then populate each `release.json` with the exact download URL, SHA-256 checksum, and byte size. Update `latest.json` only after a release package is available and verified. Preserve previous published packages for recovery.
+Each version manifest must have a `package` object and a `files` inventory that agree on filename, relative path, kind, exact byte size, and SHA-256. The package URL must be HTTPS and point to the actual release asset.
+
+When publishing, create and verify the asset and version metadata first, update `directory.json` next, and update root `latest.json` last. Preserve prior release assets for recovery.
