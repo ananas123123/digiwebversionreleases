@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "product": "Digi",
+  "version": "1.2.1.0",
+  "directory": "1.2.1.0",
+  "published_at": "2026-10-11T18:31:00Z",
+  "release_notes": "Digi 1.2.1.0 release.",
+  "package": {
+    "file_name": "Digi.Search.Engine.exe",
+    "path": "Digi.Search.Engine.exe",
+    "url": "https://github.com/ananas123123/digiwebversionreleases/releases/download/v1.2.1.0/Digi.Search.Engine.exe",
+    "kind": "installer",
+    "size_bytes": 247793411,
+    "sha256": "4e3f2a315123cf1b72cacdbae94adf13868cc2d79f97fb93422d2b7d8ebe8a38"
+  },
+  "files": [
+    {
+      "file_name": "Digi.Search.Engine.exe",
+      "path": "Digi.Search.Engine.exe",
+      "url": "https://github.com/ananas123123/digiwebversionreleases/releases/download/v1.2.1.0/Digi.Search.Engine.exe",
+      "kind": "installer",
+      "size_bytes": 247793411,
+      "sha256": "4e3f2a315123cf1b72cacdbae94adf13868cc2d79f97fb93422d2b7d8ebe8a38"
+    }
+  ]
+}
