@@ -3,8 +3,8 @@
   "product": "Digi",
   "channel": "stable",
   "latest_version": "1.2.1.0",
-  "release_status": "unpublished",
-  "message": "Digi 1.2.1.0 is staged as the next stable release but is not published yet. Updaters must not offer this release until the release asset and verified version metadata are available.",
+  "release_status": "published",
+  "message": "Digi 1.2.1.0 is the latest published stable release.",
   "release": {
     "version": "1.2.1.0"
   }
