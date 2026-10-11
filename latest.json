@@ -2,10 +2,10 @@
   "schema_version": 1,
   "product": "Digi",
   "channel": "stable",
-  "latest_version": "1.2.0.0",
-  "release_status": "published",
-  "message": "Digi 1.2.0.0 is the latest stable release. Digi 1.1.0.0 installations can detect and download this release through the directory index and version-specific metadata.",
+  "latest_version": "1.2.1.0",
+  "release_status": "unpublished",
+  "message": "Digi 1.2.1.0 is staged as the next stable release but is not published yet. Updaters must not offer this release until the release asset and verified version metadata are available.",
   "release": {
-    "version": "1.2.0.0"
+    "version": "1.2.1.0"
   }
 }
