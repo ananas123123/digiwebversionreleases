@@ -2,10 +2,10 @@
   "schema_version": 1,
   "product": "Digi",
   "channel": "stable",
-  "latest_version": "1.2.1.0",
-  "release_status": "published",
-  "message": "Digi 1.2.1.0 is the latest published stable release.",
+  "latest_version": "1.2.2.0",
+  "release_status": "unpublished",
+  "message": "Digi 1.2.2.0 is the latest unpublished stable release.",
   "release": {
-    "version": "1.2.1.0"
+    "version": "1.2.2.0"
   }
 }
