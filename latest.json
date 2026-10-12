@@ -6,6 +6,12 @@
   "release_status": "published",
   "message": "Digi 1.2.1.0 is the latest published stable release.",
   "release": {
-    "version": "1.2.1.0"
+    "version": "1.2.1.0",
+    "package": {
+      "url": "https://github.com/ananas123123/digiwebversionreleases/releases/download/v1.2.1.0/Digi.Search.Engine.exe",
+      "file_name": "Digi.Search.Engine.exe",
+      "size_bytes": 247793411,
+      "sha256": "4e3f2a315123cf1b72cacdbae94adf13868cc2d79f97fb93422d2b7d8ebe8a38"
+    }
   }
 }
